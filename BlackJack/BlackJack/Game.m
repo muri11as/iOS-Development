@@ -11,7 +11,7 @@
 
 @implementation Game
 
--(id)init: (NSString*) p
+-(id)init
 {
     self = [super init];
     if(self)
@@ -20,7 +20,6 @@
         _numPlayers = 1;
         _numDecks = 1;
         _gameNumber = 1;
-        _playName = p;
         
     }
     return self;
@@ -28,6 +27,7 @@
 }
 -(Deck*)start
 {
+    NSLog(@"HI");
     Deck* dek = [[Deck alloc]init];
     [dek makeDeck];
     return dek;

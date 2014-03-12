@@ -15,9 +15,8 @@
 @property int numPlayers;
 @property int numDecks;
 @property int gameNumber;
-@property NSString* playName;
 
--(id)init:(NSString*) p;
+-(id)init;
 -(Deck*)start;
 -(Card*)dealCard:(Deck*) d;
 

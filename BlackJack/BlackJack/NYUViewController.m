@@ -13,32 +13,44 @@
 #import "Deck.h"
 
 @interface NYUViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *secondCardDealer;
-@property (weak, nonatomic) IBOutlet UILabel *firstCardPlayer;
-@property (weak, nonatomic) IBOutlet UILabel *secCardPlayer;
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *dealerCards;
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *playerCards;
+@property (strong, nonatomic) Player* dealer;
+@property (strong, nonatomic) Player* player;
+@property (strong, nonatomic) Deck* deck;
+@property (strong, nonatomic) Game* gamey;
+@property (weak, nonatomic) IBOutlet UILabel *dealerScore;
+@property (weak, nonatomic) IBOutlet UILabel *playerScore;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *greetingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *firstCardDealer;
--(NSString*)displayCard:(Card *)c;
+@property (weak, nonatomic) IBOutlet UITextField *betTextField;
+@property (weak, nonatomic) IBOutlet UIButton *stayButton;
+@property (weak, nonatomic) IBOutlet UILabel *testLabel;
+@property (weak, nonatomic) IBOutlet UIButton *startButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *hitButton;
+@property int playWin;
 @end
 
 @implementation NYUViewController
+
+int playWin = 0;
+
 
 -(NSString*)displayCard:(Card*) c
 {
     NSMutableString* _first = [[NSMutableString alloc]init];
     
-    if ([c.face isEqual: @"King"] || [c.face isEqual: @"Queen"] || [c.face isEqual: @"Jack"] || [c.face isEqual: @"Ace"] )
+    if ([c.face isEqual: @"K"] || [c.face isEqual: @"Q"] || [c.face isEqual: @"J"] || [c.face isEqual: @"A"] )
     {
         NSString* f = [NSString stringWithFormat:@"%@ ",c.face];
         _first = [[NSMutableString alloc]initWithString:f];
     }
     else
     {
-        NSString* f = [NSString stringWithFormat:@"%i ",c.value];
+        NSString* f = [NSString stringWithFormat:@"%i ",c.val];
         _first = [[NSMutableString alloc]initWithString:f];
         
     }
@@ -47,33 +59,83 @@
     return _first;
     
 }
-- (IBAction)acquireName:(id)sender
+- (IBAction)start:(id)sender
 {
-    NSString* nam = self.nameTextField.text;
-    NSString *_msg = [NSString stringWithFormat:@"%@:", nam];
-    self.nameLabel.text = _msg;
-    Game* gamey = [[Game alloc] init:nam];
-    Deck* d = [gamey start];
-    Player* p = [[Player alloc]init];
-    [p setName:nam];
-    [p printName];
-    [self.nameTextField resignFirstResponder];
+    float _bet = [[_betTextField text] floatValue];
+    self.testLabel.text = [self.betTextField text];
+    [self.betTextField resignFirstResponder];
     
-    Card* c1 = [gamey dealCard:d];
-    Card* c2 = [gamey dealCard:d];
-    Card* c3 = [gamey dealCard:d];
-    Card* c4 = [gamey dealCard:d];
-    self.firstCardDealer.text = [self displayCard:c1];
-    self.firstCardPlayer.text = [self displayCard:c2];
-   
-    // self.secondCardDealer.text = [self displayCard:c3];
-    self.secCardPlayer.text = [self displayCard:c4];
-    
-   
+    if (_bet >= 1.00)
+    {
+        _gamey = [[Game alloc] init];
+        _dealer = [[Player alloc] init];
+        _player = [[Player alloc]init];
+        _deck = [_gamey start];
+        
+        [_player draw:[_gamey dealCard:_deck]];
+        [_player draw:[_gamey dealCard:_deck]];
+        [_dealer draw:[_gamey dealCard:_deck]];
+        
+        [self showOnScreen:_player usingCollection:_playerCards];
+        [self showOnScreen:_dealer usingCollection:_dealerCards];
+        [self.startButton resignFirstResponder];
+    }
+}
+
+-(void) showOnScreen:(Player*)p usingCollection:(NSArray*)setOfCards
+{
+    for(UILabel *cardy in setOfCards)
+    {
+        if ([cardy tag] < [p handSize])
+        {
+            _testLabel.text = @"in showScreen";
+            Card *newCard = p.hand[[cardy tag]];
+            [cardy setText:[self displayCard: newCard]];
+        }
+    }
+}
+
+-(int)calcWin
+{
+    if ([_player calcScore] > [_dealer calcScore])
+    {
+        playWin = 1;
+    }
+    else if ([_player calcScore] < [_dealer calcScore] && [_dealer calcScore] < 22)
+    {
+        playWin = 0;
+    }
+    else if ([_player calcScore] == [_dealer calcScore])
+    {
+       playWin = 1;
+    }
+    else if([_dealer calcScore] > 21)
+    {
+        playWin = 1;
+    }
+    return playWin;
+}
+
+- (IBAction)stay:(id)sender
+{
+    self.testLabel.text = @"in STAY";
+    [self dealAction];
+    [self.stayButton resignFirstResponder];
+}
+-(void) dealAction
+{
+    self.testLabel.text = @"in DEALER ACTION";
+    while ([_dealer calcScore] < 17)
+    {
+        [_dealer draw:[_gamey dealCard:_deck]];
+        [self showOnScreen:_dealer usingCollection: _dealerCards];
+    }
+    [self calcWin];
 }
 
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     [textField resignFirstResponder];
     return YES;
 }

@@ -21,7 +21,6 @@
 		5E05746718C1140B004472D0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E05744918C1140A004472D0 /* UIKit.framework */; };
 		5E05746F18C1140B004472D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E05746D18C1140B004472D0 /* InfoPlist.strings */; };
 		5E05747118C1140B004472D0 /* BlackJackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E05747018C1140B004472D0 /* BlackJackTests.m */; };
-		5E05748018C1487C004472D0 /* Dealer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E05747F18C1487C004472D0 /* Dealer.m */; };
 		5E05748318C14887004472D0 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E05748218C14887004472D0 /* Player.m */; };
 		5E05748618C14899004472D0 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E05748518C14899004472D0 /* Card.m */; };
 		5E05748918C148BB004472D0 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E05748818C148BB004472D0 /* Deck.m */; };
@@ -58,8 +57,6 @@
 		5E05746C18C1140B004472D0 /* BlackJackTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlackJackTests-Info.plist"; sourceTree = "<group>"; };
 		5E05746E18C1140B004472D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5E05747018C1140B004472D0 /* BlackJackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlackJackTests.m; sourceTree = "<group>"; };
-		5E05747E18C1487C004472D0 /* Dealer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dealer.h; sourceTree = "<group>"; };
-		5E05747F18C1487C004472D0 /* Dealer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dealer.m; sourceTree = "<group>"; };
 		5E05748118C14887004472D0 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		5E05748218C14887004472D0 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		5E05748418C14899004472D0 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
@@ -171,8 +168,6 @@
 		5E05747A18C14805004472D0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				5E05747E18C1487C004472D0 /* Dealer.h */,
-				5E05747F18C1487C004472D0 /* Dealer.m */,
 				5E05748118C14887004472D0 /* Player.h */,
 				5E05748218C14887004472D0 /* Player.m */,
 				5E05748418C14899004472D0 /* Card.h */,
@@ -230,9 +225,12 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = NYU;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Cesar Murillas";
 				TargetAttributes = {
+					5E05744118C1140A004472D0 = {
+						DevelopmentTeam = 6QN349HHUB;
+					};
 					5E05746218C1140B004472D0 = {
 						TestTargetID = 5E05744118C1140A004472D0;
 					};
@@ -283,7 +281,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E05748018C1487C004472D0 /* Dealer.m in Sources */,
 				5E05748918C148BB004472D0 /* Deck.m in Sources */,
 				5E05745218C1140A004472D0 /* main.m in Sources */,
 				5E05748C18C148E0004472D0 /* Game.m in Sources */,
@@ -344,7 +341,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -383,7 +379,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -417,10 +412,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BlackJack/BlackJack-Prefix.pch";
 				INFOPLIST_FILE = "BlackJack/BlackJack-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -430,10 +428,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BlackJack/BlackJack-Prefix.pch";
 				INFOPLIST_FILE = "BlackJack/BlackJack-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -441,7 +442,6 @@
 		5E05747818C1140B004472D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BlackJack.app/BlackJack";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -464,7 +464,6 @@
 		5E05747918C1140B004472D0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BlackJack.app/BlackJack";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -499,6 +498,7 @@
 				5E05747618C1140B004472D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5E05747718C1140B004472D0 /* Build configuration list for PBXNativeTarget "BlackJackTests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +507,7 @@
 				5E05747918C1140B004472D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

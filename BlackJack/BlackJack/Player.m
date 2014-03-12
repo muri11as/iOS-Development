@@ -7,15 +7,18 @@
 //
 
 #import "Player.h"
+#import "Card.h"
 
 @implementation Player
+@synthesize score, money;
 -(id) init
 {
     self = [super init];
     if(self)
     {
-        _money = 100.00;
-        _score = 0;
+        money = 100.00;
+        score = 0;
+        _hand = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -24,15 +27,48 @@
     if(amount < self.minBet)
         NSLog(@"NOT A VALID BET AMOUNT. DOES NOT MEET MINIMUM");
     
-    if (amount <= self.money)
-        self.money -= amount;
+    if (amount <= money)
+        money -= amount;
     
     else
         NSLog(@"NOT A VALID BET AMOUNT.");
 }
--(void)printName
+-(void)draw: (Card*) c
 {
-    if (self.name != nil)
-        NSLog(@"MY NAME IS: %@ \n",self.name);
+    [_hand addObject:c];
 }
+-(int)handSize
+{
+    return [_hand count];
+}
+-(int)calcScore
+{
+    for(int i = 0; [_hand count]; i++)
+    {
+        if([[_hand[i] displayFace] isEqual: @"J"] || [[_hand[i] displayFace] isEqual: @"Q"] || [[_hand[i] displayFace] isEqual: @"K"] )
+        {
+            score += 10;
+            
+        }
+        else if ([[_hand[i] displayFace] isEqual: @"A"])
+        {
+            int busty = score + 11;
+            if (busty < 21)
+            {
+                score +=1;
+            }
+            else
+            {
+                score += 11;
+            }
+        }
+        else
+        {
+            score += [_hand[i] val ];
+        }
+            
+    }
+    return score;
+}
+
 @end

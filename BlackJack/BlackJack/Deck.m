@@ -18,14 +18,14 @@
         _suits = [[NSMutableArray alloc] init];
         _faces = [[NSMutableArray alloc] init];
         _deckie = [[NSMutableArray alloc] init];
-        _suits[0] = @"Spades";
-        _suits[1]  = @"Clovers";
-        _suits[2]  = @"Diamonds";
-        _suits[3]  = @"Hearts";
-        _faces[0] = @"King";
-        _faces[1] = @"Queen";
-        _faces[2] = @"Jack";
-        _faces[3] = @"Ace";
+        _suits[0] = @"♠";
+        _suits[1]  = @"♣";
+        _suits[2]  = @"♦";
+        _suits[3]  = @"♥";
+        _faces[0] = @"K";
+        _faces[1] = @"Q";
+        _faces[2] = @"J";
+        _faces[3] = @"A";
     }
     return self;
 }

@@ -10,12 +10,12 @@
 
 @interface Player : Game
 
-@property NSString* name;
 @property int score;
 @property float money;
-
+@property NSMutableArray* hand;
 -(id)init;
 -(void)bet: (int) amount;
--(void)printName;
-
+-(void)draw: (Card*) c;
+-(int)handSize;
+-(int)calcScore;
 @end

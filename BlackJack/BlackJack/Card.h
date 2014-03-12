@@ -12,8 +12,9 @@
 
 @property NSString* suit;
 @property NSString* face;
-@property int value;
+@property int val;
 -(id) initCard: (NSString*) s faceOfCard: (NSString*) f;
 -(id) initWithVal: (NSString*) s valueOfCard: (int) v;
--(void) display;
+-(NSString*) displayFace;
+
 @end

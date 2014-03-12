@@ -10,6 +10,7 @@
 
 @implementation Card
 
+@synthesize val;
 -(id)initCard:(NSString *) s faceOfCard:(NSString *)f
 {
     self = [super init];
@@ -17,8 +18,12 @@
     {
         _suit = s;
         _face = f;
-        if ([_face  isEqual: @"King"] || [_face  isEqual: @"Queen"] || [_face  isEqual: @"Jack"] )
-            _value = 10;
+        if ([_face  isEqual: @"K"] || [_face  isEqual: @"Q"] || [_face  isEqual: @"J"] )
+            val = 10;
+        if ([_face isEqual:@"A"])
+        {
+            val = 11;
+        }
         
     }
     return self;
@@ -30,17 +35,15 @@
     if (self)
     {
         _suit = s;
-        _value = v;
+        val = v;
         
     }
     return self;
     
 }
 
--(void) display
+-(NSString*) displayFace
 {
-    NSLog(@"This is my suit %@ \n",self.suit);
-    NSLog(@"This is my face %@ \n",self.face);
-    NSLog(@"This is my value %i \n", self.value);
+    return _face;
 }
 @end
