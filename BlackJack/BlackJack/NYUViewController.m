@@ -80,6 +80,7 @@ int playWin = 0;
         [self showOnScreen:_dealer usingCollection:_dealerCards];
         [self.startButton resignFirstResponder];
     }
+    [_startButton setEnabled:false];
 }
 
 -(void) showOnScreen:(Player*)p usingCollection:(NSArray*)setOfCards
@@ -95,26 +96,7 @@ int playWin = 0;
     }
 }
 
--(int)calcWin
-{
-    if ([_player calcScore] > [_dealer calcScore])
-    {
-        playWin = 1;
-    }
-    else if ([_player calcScore] < [_dealer calcScore] && [_dealer calcScore] < 22)
-    {
-        playWin = 0;
-    }
-    else if ([_player calcScore] == [_dealer calcScore])
-    {
-       playWin = 1;
-    }
-    else if([_dealer calcScore] > 21)
-    {
-        playWin = 1;
-    }
-    return playWin;
-}
+
 
 - (IBAction)stay:(id)sender
 {
@@ -130,7 +112,7 @@ int playWin = 0;
         [_dealer draw:[_gamey dealCard:_deck]];
         [self showOnScreen:_dealer usingCollection: _dealerCards];
     }
-    [self calcWin];
+    //[self calcWin];
 }
 
 

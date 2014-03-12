@@ -36,6 +36,7 @@
     {
         _suit = s;
         val = v;
+        _face = @"";
         
     }
     return self;
