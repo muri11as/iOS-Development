@@ -13,9 +13,11 @@
 #import "Deck.h"
 
 @interface NYUViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *playerMoney;
 
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *dealerCards;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *playerCards;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
 @property (strong, nonatomic) Player* dealer;
 @property (strong, nonatomic) Player* player;
 @property (strong, nonatomic) Deck* deck;
@@ -26,11 +28,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *greetingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *betTextField;
-@property (weak, nonatomic) IBOutlet UIButton *stayButton;
 @property (weak, nonatomic) IBOutlet UILabel *testLabel;
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
+@property (weak, nonatomic) IBOutlet UILabel *playerScoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dealerScoreLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *hitButton;
+@property (weak, nonatomic) IBOutlet UIButton *stayButton;
+
 @property int playWin;
 @end
 
@@ -64,20 +69,29 @@ int playWin = 0;
     float _bet = [[_betTextField text] floatValue];
     self.testLabel.text = [self.betTextField text];
     [self.betTextField resignFirstResponder];
-    
     if (_bet >= 1.00)
     {
         _gamey = [[Game alloc] init];
         _dealer = [[Player alloc] init];
         _player = [[Player alloc]init];
         _deck = [_gamey start];
+         NSString* playMon = [[NSString alloc] initWithFormat:@"%f",[_player money]];
+        [_playerMoney setText:playMon];
         
+        
+        float newMon = ([_player money] - _bet);
+        NSLog(@"THIS IS PLAYER MONEY: %2f", newMon);
+        [_player setMoney:newMon];
         [_player draw:[_gamey dealCard:_deck]];
         [_player draw:[_gamey dealCard:_deck]];
         [_dealer draw:[_gamey dealCard:_deck]];
         
+        [self showCurrentScore:_player withLabel:_playerScoreLabel];
+        [self showCurrentScore:_dealer withLabel:_dealerScoreLabel];
+        [self showMoney];
         [self showOnScreen:_player usingCollection:_playerCards];
         [self showOnScreen:_dealer usingCollection:_dealerCards];
+       
         [self.startButton resignFirstResponder];
     }
     [_startButton setEnabled:false];
@@ -95,18 +109,49 @@ int playWin = 0;
         }
     }
 }
+-(void) showMoney
+{
+    NSString* money = [[NSString alloc] initWithFormat:@"%f",[_player money]];
+    NSLog(@"THIS IS MY MONEY: %@",money);
+    [_playerMoney setText:money];
+    
+}
+-(void)showCurrentScore: (Player*)p withLabel: (UILabel*) lab
+{
+    
+    NSString* score = [[NSString alloc] initWithFormat:@"%i",[p calcScore]];
+    if ([p calcScore] > 21)
+    {
+        [lab setText:@"BUST!"];
+    }
+    else
+    {
+        [lab setText: score];
+    }
+}
 
+- (IBAction)hit:(id)sender
+{
+    [_player draw:[_gamey dealCard:_deck]];
+    [self showOnScreen:_player usingCollection:_playerCards];
+    if( [_player calcScore] > 21)
+    {
+        playWin = 0;
+    }
+    [self showCurrentScore:_player withLabel:_playerScoreLabel];
+}
 
 
 - (IBAction)stay:(id)sender
 {
-    self.testLabel.text = @"in STAY";
+    //self.testLabel.text = @"in STAY";
     [self dealAction];
+    [self showCurrentScore:_dealer withLabel:_dealerScoreLabel];
     [self.stayButton resignFirstResponder];
 }
 -(void) dealAction
 {
-    self.testLabel.text = @"in DEALER ACTION";
+    //self.testLabel.text = @"in DEALER ACTION";
     while ([_dealer calcScore] < 17)
     {
         [_dealer draw:[_gamey dealCard:_deck]];
@@ -125,6 +170,7 @@ int playWin = 0;
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
    

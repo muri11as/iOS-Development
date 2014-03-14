@@ -43,33 +43,33 @@
 }
 -(int)calcScore
 {
-    int value = 0;
+    score = 0;
     for (int i = 0; i < [_hand count]; i++)
     {
         if ([[_hand[i] displayFace] isEqualToString:@"J"] || [[_hand[i] displayFace] isEqualToString:@"Q"] || [[_hand[i] displayFace] isEqualToString:@"K"])
         {
-            value += 10;
+            score += 10;
         }
         else if ([[_hand[i] displayFace] isEqualToString:@"A"])
         {
-            int busty = value + 11;
+            int busty = score + 11;
             if (busty >21)
             {
-                value +=1;
+                score +=1;
             }
             else
             {
-                value += 11;
+                score += 11;
             }
             
         }
         else
         {
-            value += [_hand[i] val];
+            score += [_hand[i] val];
         }
     }
 
-    return value;
+    return score;
 }
 
 @end
