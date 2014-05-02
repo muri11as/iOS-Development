@@ -166,12 +166,12 @@ int playWin = 0;
         playWin = 0;
     }
     [self showCurrentScore:_player withLabel:_playerScoreLabel];
+    [self calcWin];
 }
 
 
 - (IBAction)stay:(id)sender
 {
-    //self.testLabel.text = @"in STAY";
     [self dealAction];
     [self showCurrentScore:_dealer withLabel:_dealerScoreLabel];
     [self.stayButton resignFirstResponder];
