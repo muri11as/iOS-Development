@@ -51,7 +51,7 @@
             self.totalCards += 1;
         }
     }
-    NSLog(@"Total cards in deck: %i \n",self.totalCards);
+  //  NSLog(@"Total cards in deck: %i \n",self.totalCards);
 }
 -(Card*)showCard:(int) idx
 {

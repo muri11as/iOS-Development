@@ -16,6 +16,7 @@
 -(id)init;
 -(void)bet: (int) amount;
 -(void)draw: (Card*) c;
+-(void) discard;
 -(int)handSize;
 -(int)calcScore;
 @end

@@ -65,22 +65,20 @@ int playWin = 0;
     
 }
 - (IBAction)start:(id)sender
+
 {
+    [self cleanUp];
     float _bet = [[_betTextField text] floatValue];
-    self.testLabel.text = [self.betTextField text];
+    //self.testLabel.text = [self.betTextField text];
     [self.betTextField resignFirstResponder];
     if (_bet >= 1.00)
     {
-        _gamey = [[Game alloc] init];
-        _dealer = [[Player alloc] init];
-        _player = [[Player alloc]init];
-        _deck = [_gamey start];
-         NSString* playMon = [[NSString alloc] initWithFormat:@"%f",[_player money]];
+        NSString* playMon = [[NSString alloc] initWithFormat:@"%f",[_player money]];
         [_playerMoney setText:playMon];
         
         
         float newMon = ([_player money] - _bet);
-        NSLog(@"THIS IS PLAYER MONEY: %2f", newMon);
+        //NSLog(@"THIS IS PLAYER MONEY: %2f", newMon);
         [_player setMoney:newMon];
         [_player draw:[_gamey dealCard:_deck]];
         [_player draw:[_gamey dealCard:_deck]];
@@ -94,7 +92,42 @@ int playWin = 0;
        
         [self.startButton resignFirstResponder];
     }
+    //[self cleanUp];
     [_startButton setEnabled:false];
+}
+-(void)calcWin
+{
+    if( _dealer.score > _player.score && _dealer.score < 22)
+    {
+        playWin = 0;
+        self.testLabel.text = @"DEALER WINS. PLAY AGAIN!";
+        self.startButton.enabled = YES;
+    }
+    else if (_player.score > _dealer.score && _player.score < 22)
+    {
+        playWin = 1;
+        self.testLabel.text = @"YOU WIN. PLAY AGAIN!";
+        self.startButton.enabled = YES;
+        //give winnings
+    }
+    else if(_dealer.score == _player.score)
+    {
+        playWin = 0;
+        self.testLabel.text = @"DEALER WINS. PLAY AGAIN!";
+        self.startButton.enabled = YES;
+    }
+    else if(_player.score > 21)
+    {
+        playWin = 0;
+        self.testLabel.text = @"BUST. YOU LOSE. PLAY AGAIN!";
+        self.startButton.enabled = YES;
+    }
+    else if(_dealer.score > 21)
+    {
+        playWin = 1;
+        self.testLabel.text = @"DEALER BUST. YOU WIN. PLAY AGAIN!";
+        self.startButton.enabled = YES;
+    }
 }
 
 -(void) showOnScreen:(Player*)p usingCollection:(NSArray*)setOfCards
@@ -103,7 +136,7 @@ int playWin = 0;
     {
         if ([cardy tag] < [p handSize])
         {
-            _testLabel.text = @"in showScreen";
+            //_testLabel.text = @"in showScreen";
             Card *newCard = p.hand[[cardy tag]];
             [cardy setText:[self displayCard: newCard]];
         }
@@ -120,14 +153,8 @@ int playWin = 0;
 {
     
     NSString* score = [[NSString alloc] initWithFormat:@"%i",[p calcScore]];
-    if ([p calcScore] > 21)
-    {
-        [lab setText:@"BUST!"];
-    }
-    else
-    {
-        [lab setText: score];
-    }
+   
+    [lab setText: score];
 }
 
 - (IBAction)hit:(id)sender
@@ -148,6 +175,7 @@ int playWin = 0;
     [self dealAction];
     [self showCurrentScore:_dealer withLabel:_dealerScoreLabel];
     [self.stayButton resignFirstResponder];
+    [self calcWin];
 }
 -(void) dealAction
 {
@@ -157,7 +185,6 @@ int playWin = 0;
         [_dealer draw:[_gamey dealCard:_deck]];
         [self showOnScreen:_dealer usingCollection: _dealerCards];
     }
-    //[self calcWin];
 }
 
 
@@ -167,11 +194,36 @@ int playWin = 0;
     return YES;
 }
 
+-(void)cleanUp
+{
+    _gamey.gameNumber +=1;
+    for(UILabel *cardy in _dealerCards)
+    {
+        [cardy setText: @""];
+    }
+    for(UILabel *cardy in _playerCards)
+    {
+        [cardy setText: @""];
+    }
+     NSLog(@"PLAYER HAND PRE: %i",_player.handSize);
+    [_player discard];
+    [_dealer discard];
+    NSLog(@"PLAYER HAND POST: %i",_player.handSize);
+    self.dealerScoreLabel.text = @"";
+    self.playerScoreLabel.text = @"";
+    self.testLabel.text = @"";
+}
 
 - (void)viewDidLoad
 {
     
     [super viewDidLoad];
+    _gamey = [[Game alloc] init];
+    _dealer = [[Player alloc] init];
+    _player = [[Player alloc]init];
+    _deck = [_gamey start];
+
+    
 	// Do any additional setup after loading the view, typically from a nib.
    
 }

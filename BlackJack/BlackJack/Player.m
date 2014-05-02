@@ -41,6 +41,11 @@
 {
     return [_hand count];
 }
+-(void)discard
+{
+    
+    [_hand removeAllObjects];
+}
 -(int)calcScore
 {
     score = 0;
