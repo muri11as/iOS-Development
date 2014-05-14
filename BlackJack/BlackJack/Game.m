@@ -19,7 +19,8 @@
         _minBet = 1.00;
         _numPlayers = 1;
         _numDecks = 1;
-        _gameNumber = 1;
+        _gameNumber = 0;
+        _totalBet = 0.00;
         
     }
     return self;
@@ -30,13 +31,16 @@
     //NSLog(@"HI");
     Deck* dek = [[Deck alloc]init];
     [dek makeDeck];
+    _usedUp = [[NSMutableArray alloc] init];
     return dek;
 }
 -(Card*)dealCard:(Deck*) d
 {
-    int card = arc4random_uniform(52);
-   // NSLog(@"THIS IS RANDOM NUMBER: %i",card);
-    return [d showCard:card];
+    Card* lastCard = [d.deckie lastObject];
+    [d.deckie removeLastObject];
+    [_usedUp addObject: lastCard];
+    return lastCard;
+    
     
 }
 

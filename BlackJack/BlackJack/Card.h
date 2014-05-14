@@ -9,12 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface Card : NSObject
-
+@property  int uID;
 @property NSString* suit;
 @property NSString* face;
 @property int val;
 -(id) initCard: (NSString*) s faceOfCard: (NSString*) f;
 -(id) initWithVal: (NSString*) s valueOfCard: (int) v;
 -(NSString*) displayFace;
+-(int) getuID;
 
 @end

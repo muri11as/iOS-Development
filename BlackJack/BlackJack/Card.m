@@ -47,4 +47,8 @@
 {
     return _face;
 }
+-(int)getuID
+{
+    return _uID;
+}
 @end

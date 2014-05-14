@@ -81,7 +81,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEe-3Q-Xa4">
-                                <rect key="frame" x="179" y="308" width="39" height="55"/>
+                                <rect key="frame" x="179" y="308" width="42" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -106,14 +106,14 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zc7-L3-5KX">
-                                <rect key="frame" x="53" y="445" width="199" height="40"/>
+                                <rect key="frame" x="27" y="445" width="262" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.72673233699999995" green="0.1265184352" blue="0.036344320079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.96775980399999995" green="1" blue="0.92112957549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lXl-d6-aOA">
-                                <rect key="frame" x="98" y="386" width="46" height="30"/>
+                                <rect key="frame" x="13" y="386" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -135,7 +135,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taq-Xd-KAH">
-                                <rect key="frame" x="176" y="386" width="46" height="30"/>
+                                <rect key="frame" x="89" y="386" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -186,18 +186,58 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGK-8a-buY">
+                                <rect key="frame" x="161" y="386" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="Double">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doubleBet:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="LE6-yl-3lY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N7j-gy-LQB">
+                                <rect key="frame" x="20" y="228" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="Bet">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="betMoney:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cZF-0M-LLk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xpk-k1-UK1">
+                                <rect key="frame" x="234" y="386" width="66" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="Surrender">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="surrender:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Bkw-EB-Fs5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.030150539946135889" green="0.57627802309782616" blue="0.098689683274460566" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="kj9-VC-4Sc"/>
                     <connections>
+                        <outlet property="betButton" destination="N7j-gy-LQB" id="RPk-Ag-US7"/>
                         <outlet property="betTextField" destination="Bwf-Ip-Iur" id="giL-Ff-5cD"/>
+                        <outlet property="dblButton" destination="aGK-8a-buY" id="HrB-yI-NgR"/>
                         <outlet property="dealerScoreLabel" destination="eK7-BX-Bjd" id="r0E-QS-256"/>
+                        <outlet property="hitButton" destination="taq-Xd-KAH" id="Can-uv-onb"/>
                         <outlet property="moneyLabel" destination="RDt-UZ-KRb" id="eY5-mU-y1O"/>
                         <outlet property="playerMoney" destination="kzy-o5-7NL" id="96I-zq-Fg2"/>
                         <outlet property="playerScoreLabel" destination="dN3-xz-KTb" id="xjO-r0-biz"/>
                         <outlet property="startButton" destination="EXz-zj-lcd" id="rCv-x4-mgK"/>
-                        <outlet property="stayButton" destination="taq-Xd-KAH" id="hoY-gj-qKt"/>
+                        <outlet property="stayButton" destination="lXl-d6-aOA" id="DcQ-0n-86Z"/>
+                        <outlet property="surrButton" destination="xpk-k1-UK1" id="4oX-Ox-lAG"/>
                         <outlet property="testLabel" destination="Zc7-L3-5KX" id="FMC-1z-LJr"/>
                         <outletCollection property="dealerCards" destination="6b2-DW-7bn" id="ApS-i8-Y5N"/>
                         <outletCollection property="dealerCards" destination="cNz-gY-f1B" id="6LO-qG-6YE"/>

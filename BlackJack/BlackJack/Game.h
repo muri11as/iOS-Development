@@ -15,6 +15,8 @@
 @property int numPlayers;
 @property int numDecks;
 @property int gameNumber;
+@property NSMutableArray *usedUp;
+@property float totalBet;
 
 -(id)init;
 -(Deck*)start;

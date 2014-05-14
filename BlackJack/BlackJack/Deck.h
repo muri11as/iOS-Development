@@ -18,4 +18,5 @@
 -(id)init;
 -(void) makeDeck;
 -(Card*)showCard:(int) idx;
+-(void) shuffleDeck;
 @end
